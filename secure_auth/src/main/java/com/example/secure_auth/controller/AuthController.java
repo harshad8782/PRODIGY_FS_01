@@ -11,6 +11,8 @@ import com.example.secure_auth.DTO.LoginRequest;
 import com.example.secure_auth.DTO.RegisterRequest;
 import com.example.secure_auth.service.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -19,13 +21,14 @@ public class AuthController {
 	private AuthService authService;
 	
 	  @PostMapping("/register")
-	    public ResponseEntity<AuthResponse>register(@RequestBody RegisterRequest request) {
+	    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
 	        return  ResponseEntity.ok(authService.register(request));
 	    }
 
 	    @PostMapping("/login")
-	    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-	        return ResponseEntity.ok(authService.login(request));
+	    public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest request) {
+	        // Use the method that returns full user data
+	        return ResponseEntity.ok(authService.loginWithUserData(request));
 	    }
 
 }

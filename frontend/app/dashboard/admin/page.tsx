@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
-import { Users, Settings, Shield, BarChart3 } from "lucide-react"
+import { Users, Settings, Shield, BarChart3, User } from "lucide-react"
 
 export default function AdminDashboard() {
   const { user, logout } = useAuth()
@@ -69,12 +69,12 @@ export default function AdminDashboard() {
           </Card>
 
           {/* Admin Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="hover:shadow-lg transition-shadow border-red-200">
               <CardHeader className="text-center">
                 <Users className="w-12 h-12 mx-auto text-red-600 mb-2" />
                 <CardTitle className="text-red-800">User Management</CardTitle>
-                <CardDescription>Manage student and admin accounts</CardDescription>
+                <CardDescription>Manage student and admin</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button className="w-full bg-red-600 hover:bg-red-700">Manage Users</Button>
@@ -100,6 +100,19 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <Button className="w-full bg-red-600 hover:bg-red-700">System Settings</Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow border-red-200">
+              <CardHeader className="text-center">
+                <User className="w-12 h-12 mx-auto text-red-600 mb-2" />
+                <CardTitle className="text-red-800">Profile Settings</CardTitle>
+                <CardDescription>Manage your account information</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full bg-red-600 hover:bg-red-700" onClick={() => router.push("/profile")}>
+                  Manage Profile
+                </Button>
               </CardContent>
             </Card>
           </div>

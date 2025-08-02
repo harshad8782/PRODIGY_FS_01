@@ -69,7 +69,7 @@ export default function StudentDashboard() {
           </Card>
 
           {/* Student Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="hover:shadow-lg transition-shadow border-blue-200">
               <CardHeader className="text-center">
                 <BookOpen className="w-12 h-12 mx-auto text-blue-600 mb-2" />
@@ -100,6 +100,19 @@ export default function StudentDashboard() {
               </CardHeader>
               <CardContent>
                 <Button className="w-full bg-blue-600 hover:bg-blue-700">View Grades</Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow border-blue-200">
+              <CardHeader className="text-center">
+                <User className="w-12 h-12 mx-auto text-blue-600 mb-2" />
+                <CardTitle className="text-blue-800">Profile Settings</CardTitle>
+                <CardDescription>Manage your account information</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={() => router.push("/profile")}>
+                  Manage Profile
+                </Button>
               </CardContent>
             </Card>
           </div>

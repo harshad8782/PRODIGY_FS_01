@@ -11,6 +11,10 @@ import com.example.secure_auth.entity.User;
 import com.example.secure_auth.enums.Role;
 import com.example.secure_auth.repository.UserRepository;
 import com.example.secure_auth.security.JwtUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class AuthService {
 
@@ -61,5 +65,29 @@ public class AuthService {
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
         return new AuthResponse(token, "Login successful");
+    }
+
+    public Map<String, Object> loginWithUserData(LoginRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("message", "Login successful");
+        response.put("id", user.getId());
+        response.put("username", user.getUsername());
+        response.put("firstName", user.getFirstName());
+        response.put("lastName", user.getLastName());
+        response.put("email", user.getEmail());
+        response.put("phone", user.getPhone());
+        response.put("role", user.getRole().name());
+
+        return response;
     }
 }
